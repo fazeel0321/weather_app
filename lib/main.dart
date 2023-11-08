@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_app/controller/provider/store_provider.dart';
+import 'package:weather_app/controller/provider/weather_provider.dart';
 import 'package:weather_app/model/weather_model.dart';
 import 'package:weather_app/view/dictionaryapi.dart';
 import 'package:weather_app/view/dummyapi.dart';
@@ -19,18 +20,14 @@ class WeatherApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return
-        // MultiProvider(Provider[
-        //   // ChangeNotifier(create:(context)=>Storeprovider)
-        // ]
-        //   child:
-        MultiProvider(providers: [
-          // ChangeNotifier(create: (context)=> WeatherModel.fromJson(json))
-        ],
-          child: MaterialApp(
-              debugShowCheckedModeBanner: false,
-              home: screen1(),
-            ),
-        );
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: ((context) => WeatherProvider()))
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: screen1(),
+      ),
+    );
   }
 }
