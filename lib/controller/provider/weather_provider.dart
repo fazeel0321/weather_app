@@ -9,9 +9,31 @@ import '../../model/weather_model.dart';
 
 class WeatherProvider extends ChangeNotifier {
   WeatherModel? weatherdata;
-
+  String city = 'lahore';
   getWeather() async {
-    weatherdata = await ApiManager.getWeather();
+    weatherdata = await ApiManager.getWeather(city);
+    notifyListeners();
+  }
+
+  getBackgroundImage() {
+    if (weatherdata == null) {
+      return 'images/sunny.jpg';
+    }
+    var weatherCondition = weatherdata!.weather[0].main;
+    if (weatherCondition == 'Clear') {
+      return 'images/sunny.jpg';
+    } else if (weatherCondition == 'Clouds') {
+      return 'images/cloudy.jpg';
+    } else if (weatherCondition == 'Rain') {
+      return 'images/thunder.jpg';
+    } else {
+      return 'images/winter.jpg';
+    }
+  }
+
+  getWeatherForCity(String newCity) async {
+    city = newCity;
+    weatherdata = await ApiManager.getWeather(city);
     notifyListeners();
   }
 }

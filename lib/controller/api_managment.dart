@@ -18,13 +18,10 @@ class ApiManager {
     return storedata;
   }
 
-  static getWeather() async {
-    // setState(() {
-    //   weatherdata = null;
-    // });
-    String url = baseurlweather + endurlweather + apikeywether;
+  static Future<WeatherModel> getWeather(String city) async {
+    String url =
+        baseurlweather + '/data/2.5/weather?q=$city&appid=' + apikeywether;
     var data = await http.get(Uri.parse(url));
-
     var finaldata = jsonDecode(data.body);
 
     var modeldata = weatherModelFromJson(jsonEncode(finaldata));
