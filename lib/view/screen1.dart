@@ -175,8 +175,7 @@ class _screen1State extends State<screen1> {
                     InkWell(
                       onTap: () {
                         if (citycontroller.text.isNotEmpty) {
-                          provider.getWeatherForCity(citycontroller
-                              .text); // یہاں متغیر 'city' کی قیمت تبدیل ہو رہی ہے
+                          provider.getWeatherForCity(citycontroller.text);
                         }
                       },
                       child: CustomButton(
