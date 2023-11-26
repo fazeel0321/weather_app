@@ -21,7 +21,7 @@ class WeatherProvider extends ChangeNotifier {
     }
     var weatherCondition = weatherdata!.weather[0].main;
     if (weatherCondition == 'Clear') {
-      return 'images/sunny.jpg';
+      return 'images/winter.jpg';
     } else if (weatherCondition == 'Clouds') {
       return 'images/cloudy.jpg';
     } else if (weatherCondition == 'Rain') {
@@ -32,6 +32,8 @@ class WeatherProvider extends ChangeNotifier {
   }
 
   getWeatherForCity(String newCity) async {
+    weatherdata = null;
+    notifyListeners();
     city = newCity;
     weatherdata = await ApiManager.getWeather(city);
     notifyListeners();

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:http/http.dart' as http;
 import 'package:weather_app/controller/end_url.dart';
@@ -8,7 +9,7 @@ import '../model/store_model.dart';
 
 class ApiManager {
   String url = baseUrl;
-  getstoredata() async {
+  static getstoredata() async {
     var url = baseUrl;
 
     var data = await http.get(Uri.parse(url));
@@ -21,10 +22,12 @@ class ApiManager {
   static Future<WeatherModel> getWeather(String city) async {
     String url =
         baseurlweather + '/data/2.5/weather?q=$city&appid=' + apikeywether;
+
     var data = await http.get(Uri.parse(url));
     var finaldata = jsonDecode(data.body);
-
-    var modeldata = weatherModelFromJson(jsonEncode(finaldata));
+    // debugger();
+    var modeldata = WeatherModel.fromJson(finaldata);
+    // debugger();
     return modeldata;
   }
 }

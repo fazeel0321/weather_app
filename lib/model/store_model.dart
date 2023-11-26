@@ -35,6 +35,14 @@ class Temperatures {
         rating: Rating.fromJson(json["rating"]),
       );
 
+  num? get lenght => null;
+
+  get i => null;
+
+  get length => null;
+
+  get index => null;
+
   Map<String, dynamic> toJson() => {
         "id": id,
         "title": title,
