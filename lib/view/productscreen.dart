@@ -1,52 +1,42 @@
 import 'package:flutter/material.dart';
+import '../model/new_model.dart';
+import '../model/products_model.dart';
 
-class ProductDetailScreen extends StatefulWidget {
-  final productData;
+class ProductDetailScreen extends StatelessWidget {
+  final ProductsModel product;
 
-  ProductDetailScreen({this.productData});
+  const ProductDetailScreen({Key? key, required this.product})
+      : super(key: key);
 
-  @override
-  State<ProductDetailScreen> createState() => _ProductDetailScreenState();
-}
-
-class _ProductDetailScreenState extends State<ProductDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.productData != null
-            ? widget.productData['title']
-            : 'Product Detail'),
+        title: Text('Product Details'),
       ),
-      body: widget.productData == null
-          ? Center(
-              child: Text('Product not found.'),
-            )
-          : Center(
-              child: Padding(
-                padding: const EdgeInsets.all(10),
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: <Widget>[
-                      widget.productData['image'] != null
-                          ? Image.network(widget.productData['image'])
-                          : Container(),
-                      SizedBox(height: 16),
-                      Text(widget.productData['title'] ?? ''),
-                      SizedBox(height: 16),
-                      Text(widget.productData['description'] ?? ''),
-                      SizedBox(height: 16),
-                      Text(
-                          'Price: ${widget.productData['price'] != null ? widget.productData['price'].toString() : ''}'),
-                      SizedBox(height: 16),
-                      Text(
-                          'Rating: ${widget.productData['rating'] != null ? widget.productData['rating']['rate'].toString() : ''}'),
-                    ],
-                  ),
-                ),
-              ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              product.title,
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
+            SizedBox(height: 10),
+            Image.network(
+              product.image,
+              height: 200,
+              width: 200,
+              fit: BoxFit.cover,
+            ),
+            SizedBox(height: 10),
+            Text(
+              'Price: \$${product.price.toStringAsFixed(2)}',
+              style: TextStyle(fontSize: 18),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

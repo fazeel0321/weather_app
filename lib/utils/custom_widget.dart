@@ -126,7 +126,7 @@ class CustomImageContainer extends StatelessWidget {
       height: height,
       child: child,
       decoration: BoxDecoration(
-        image: DecorationImage(image: NetworkImage(imageUrl), fit: fit),
+        image: DecorationImage(image: AssetImage(imageUrl), fit: fit),
       ),
     );
   }
@@ -169,4 +169,23 @@ class ImageTextContainer extends StatelessWidget {
       ),
     );
   }
+}
+
+class CustomSnackBar extends SnackBar {
+  final String message;
+  final Color backgroundColor;
+  final Duration duration;
+
+  CustomSnackBar({
+    required this.message,
+    this.backgroundColor = Colors.blue,
+    this.duration = const Duration(seconds: 3),
+  }) : super(
+          content: Text(
+            message,
+            style: TextStyle(color: Colors.white),
+          ),
+          backgroundColor: backgroundColor,
+          duration: duration,
+        );
 }

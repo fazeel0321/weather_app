@@ -1,12 +1,17 @@
+// To parse this JSON data, do
+//
+//     final productsModel = productsModelFromJson(jsonString);
+
 import 'dart:convert';
 
-List<Temperatures> temperaturesFromJson(String str) => List<Temperatures>.from(
-    json.decode(str).map((x) => Temperatures.fromJson(x)));
+List<ProductsModel> productsModelFromJson(String str) =>
+    List<ProductsModel>.from(
+        json.decode(str).map((x) => ProductsModel.fromJson(x)));
 
-String temperaturesToJson(List<Temperatures> data) =>
+String productsModelToJson(List<ProductsModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class Temperatures {
+class ProductsModel {
   int id;
   String title;
   double price;
@@ -15,7 +20,7 @@ class Temperatures {
   String image;
   Rating rating;
 
-  Temperatures({
+  ProductsModel({
     required this.id,
     required this.title,
     required this.price,
@@ -25,7 +30,7 @@ class Temperatures {
     required this.rating,
   });
 
-  factory Temperatures.fromJson(Map<String, dynamic> json) => Temperatures(
+  factory ProductsModel.fromJson(Map<String, dynamic> json) => ProductsModel(
         id: json["id"],
         title: json["title"],
         price: json["price"]?.toDouble(),
@@ -34,14 +39,6 @@ class Temperatures {
         image: json["image"],
         rating: Rating.fromJson(json["rating"]),
       );
-
-  num? get lenght => null;
-
-  get i => null;
-
-  get length => null;
-
-  get index => null;
 
   Map<String, dynamic> toJson() => {
         "id": id,
