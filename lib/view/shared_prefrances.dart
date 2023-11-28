@@ -23,7 +23,7 @@ class _SharedPrefrancesState extends State<SharedPrefrances> {
     super.initState();
     ProductProvider provider =
         Provider.of<ProductProvider>(context, listen: false);
-    provider.getitem();
+    provider.getItems();
   }
 
   Widget build(BuildContext context) {
@@ -91,16 +91,21 @@ class _SharedPrefrancesState extends State<SharedPrefrances> {
                                       'Price: \$${product.price.toStringAsFixed(2)}',
                                       style: TextStyle(color: Colors.grey),
                                     ),
-                                    InkWell(
-                                      onTap: () {
-                                        provider.toggleFavorite(product);
+                                    Consumer<ProductProvider>(
+                                      builder: (context, provider, _) {
+                                        return InkWell(
+                                          onTap: () {
+                                            provider.toggleFavorite(product);
+                                          },
+                                          child: Icon(
+                                            isFavorite
+                                                ? Icons.favorite
+                                                : Icons.favorite_border,
+                                            color:
+                                                isFavorite ? Colors.red : null,
+                                          ),
+                                        );
                                       },
-                                      child: Icon(
-                                        isFavorite
-                                            ? Icons.favorite
-                                            : Icons.favorite_border,
-                                        color: isFavorite ? Colors.red : null,
-                                      ),
                                     ),
                                   ],
                                 ),

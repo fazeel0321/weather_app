@@ -14,6 +14,7 @@ import 'package:weather_app/view/productscreen.dart';
 import 'package:weather_app/view/shared_prefrances.dart';
 import 'package:weather_app/view/weather_screen.dart';
 
+import 'controller/provider/favourite_provider.dart';
 import 'controller/provider/products_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -35,7 +36,10 @@ class WeatherApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: ((context) => WeatherProvider())),
         // ChangeNotifierProvider(create: ((context) => StoreProvider())),
-        ChangeNotifierProvider(create: ((context) => ProductProvider()))
+        ChangeNotifierProvider(create: ((context) => ProductProvider())),
+        ChangeNotifierProvider<FavouriteProvider>(
+          create: (context) => FavouriteProvider(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
